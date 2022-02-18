@@ -1,0 +1,30 @@
+{
+  "id": "3190927",
+  "name": "react-blog",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "122709",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "8760187",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "22779598",
+      "name": "数译_翻译-36",
+      "font_class": "shuyi_fanyi-36",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    }
+  ]
+}
