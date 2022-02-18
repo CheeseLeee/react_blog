@@ -1,24 +1,18 @@
 import Head from "./components/public/Head/Head"
-import { BrowserRouter,Route,Routes,withRouter} from "react-router-dom";
-import Home from './views/Home/Home'
-import Diary from "./views/Diary/Diary";
+import { BrowserRouter,Route,Routes} from "react-router-dom";
+
+import {routes} from './router/index'
 function App(){
+  const routesComt = routes.map(item => {
+    const Ele = item.element
+    return <Route path={item.path} element={<Ele/>} key={item.name}></Route>
+  })
   return (
-    <div id="app">
-      
+    <div id="app"> 
       <BrowserRouter >
-      <Head/>
+        <Head/>
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/diary" element={<Diary/>} />
-          <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+         {routesComt}
         </Routes> 
       </BrowserRouter>
     </div>

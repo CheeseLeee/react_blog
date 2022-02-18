@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './Head.module.css'
 export default function Head() {
+    // handler nav
     let location = useLocation()
     useEffect(() => {
         console.log(location)
