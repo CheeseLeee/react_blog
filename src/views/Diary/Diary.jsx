@@ -1,7 +1,7 @@
 export default function Diary(props){
     return (
-        <>
-            i am diary
-        </>
+        <div>
+           i am diary
+        </div>
     )
 }

@@ -1,21 +1,23 @@
 import Head from "./components/public/Head/Head"
-import { BrowserRouter,Route,Routes} from "react-router-dom";
 
-import {routes} from './router/index'
+import { BrowserRouter,Route,Routes, useLocation,useRoutes} from "react-router-dom";
+ import {routes} from './router/index'
+
+function Router(){
+  const elements = useRoutes(routes)
+  console.log(elements)
+  return elements 
+}
 function App(){
-  const routesComt = routes.map(item => {
-    const Ele = item.element
-    return <Route path={item.path} element={<Ele/>} key={item.name}></Route>
-  })
   return (
-    <div id="app"> 
-      <BrowserRouter >
+    <div id="app">
+      <BrowserRouter>
         <Head/>
-        <Routes>
-         {routesComt}
-        </Routes> 
-      </BrowserRouter>
+        <Router/>
+  
+      </BrowserRouter>    
     </div>
   )
 }
+
 export default App
