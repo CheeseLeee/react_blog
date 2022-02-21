@@ -26,11 +26,11 @@ export const routes = [
         element: <Aside/>,//WithSuspense(Home),
         children:[
             {
-                path:'home',
+                path:'home1',
                 element:<Home/>
             },
             {
-                path:'diary',
+                path:'home2',
                 element:<Diary/>               
             }
         ],
@@ -43,12 +43,12 @@ export const routes = [
         element: <Aside/>,//WithSuspense(Diary),
         children:[
             {
-                path:'home',
-                element:<div>111</div>
+                path:'diary1',
+                element:<div>123</div>
             },
             {
-                path:'diary',
-                element:<div>111</div>             
+                path:'diary2',
+                element:<Diary/>            
             }
         ],
         meta: {title:'Diary'},

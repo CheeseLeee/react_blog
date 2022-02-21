@@ -1,28 +1,27 @@
-import { useLocation, useNavigate ,BrowserRouter, Route,Routes} from 'react-router-dom'
-import Home from '../Home/Home'
+import { useLocation, useNavigate , Route, Routes, Outlet } from 'react-router-dom'
 import styles from '../Aside/Aside.module.css'
-import Diary from '../Diary/Diary'
-import { useEffect } from 'react'
+
 export default function Aside(){
     const location = useLocation()
-     console.log(location)
-/*     let {title,navs} = location.state
-     console.log(navs)  */
-   /* 
-    let asideConfig = location.state.asideConfig
-    let topMenu = asideConfig.topMenu.map((item,index) => {
-        return <span key={index}>{item.name}</span>
-    }) */
+    let navigate = useNavigate()
+    let navs 
+    let topMenu
+    function goRoute(index) {
+        navigate(navs[index].path)
+    }
+    if(location.state   ){
+        navs = location.state.data
+        console.log(navs)
+        topMenu = navs.map((item,index) => {
+            return <span onClick={() => goRoute(index)} key={index}>{item.name}</span>
+        }) 
+    }
+
 
     return (
         <div>
             <div className={styles.main}>
-{/*                 <Routes>
-                    <Route path={asideConfig.topMenu[0].routePath} element={<Home/>}/>
-                    <Route path={asideConfig.topMenu[1].routePath} element={<Diary/>}/>
-                    <Route path="*" element={<div>onthing</div>}></Route>
-                </Routes> */}
-               
+                <Outlet /> 
             </div>
             <div className={styles.aisde_bg}>
                 <div className={styles.Aside_title}>
@@ -30,7 +29,7 @@ export default function Aside(){
                     <p>^</p>
                 </div>
                 <ul className={styles.Aside_menu}>
-                    {/* {topMenu} */}
+                    {topMenu}
                 </ul>
                 <ul className={styles.Aside_bottomMenu}>
                    {/*  {bottomMenu} */}

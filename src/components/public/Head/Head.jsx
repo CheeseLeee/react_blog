@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './Head.module.css'
-export default function Head() {
-
+export default function Head(props) {
+    console.log(props.store.getState())
+    let navs = props.store.getState().headerNav
     // handler nav
     let location = useLocation()
     useEffect(() => {      
@@ -22,13 +23,10 @@ export default function Head() {
     }
     let [activeHeaderItem, setActiveHeaderItem] = useState(0) 
     let navigate = useNavigate();
-    function clickHeaderItems(idx) {
+    function clickHeaderItems(idx) {    
         setActiveHeaderItem(idx)
-  
-        let title = navs[idx].childrenNav.title
-        let navsRouter = navs[idx].childrenNav.navsRouter
-  
-        navigate(navs[idx].path,{state:{title,navs:navsRouter}})
+        console.log(navs[idx].path,'??? ')
+        navigate(navs[idx].path,{state:{data:navs[idx].children}})
     }
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     function focusInput(){
@@ -37,64 +35,16 @@ export default function Head() {
     function blurInput(){
         setIsFocus_SearchInput(false)
     }
-    let navs = [
+/*     let navs = [
         {
             name:'主页',
             path:'/',
-            childrenNav:{
-                title:'主页导航',
-                navsRouter:{
-                    topNavs:[
-                        {
-                            name:'主页1',
-                            path:'/home1',
-                            element:<div>主页1</div>
-                        },
-                        {
-                            name:'主页2',
-                            path:'/home2',
-                            element:<div>主页2</div>
-                        },  
-                    ],
-                    bottomNavs:[
-                        {
-                            name:'主页bottom',
-                            path:'/home1',
-                            element:<div>主页1</div>
-                        },
-                    ]
-                }
-            }
         },
         {
             name:'日志',
             path:'/diary',
-            childrenNav:{
-                title:'日志导航',
-                navsRouter:{
-                    topNavs:[
-                        {
-                            name:'日志1',
-                            path:'/diary1',
-                            element:<div>日志1</div>
-                        },
-                        {
-                            name:'日志2',
-                            path:'/diary2',
-                            element:<div>日志2</div>
-                        }, 
-                    ],
-                    bottomNavs:[
-                        {
-                            name:'主页bottom',
-                            path:'/home1',
-                            element:<div>主页1</div>
-                        },
-                    ]
-                }
-            }
+        
         },
-
         {
             name:'文档',
             path:'/doc',
@@ -103,7 +53,7 @@ export default function Head() {
             name:'社区',
             path:'/community',
         },
-    ]
+    ] */
     let headerItems = navs.map((item, idx) => {
         return <li key={idx}
                 onClick={() => clickHeaderItems(idx)}
