@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './Head.module.css'
 export default function Head() {
+
     // handler nav
     let location = useLocation()
-    useEffect(() => {
-        console.log(location)
+    useEffect(() => {      
         activateNav(location)
     },[location]) 
-    function activateNav(location){
+    function activateNav(location){    
         let currentUrl = location.pathname
         let navPaths = navs.map(item => {
             return item.path
@@ -24,7 +24,11 @@ export default function Head() {
     let navigate = useNavigate();
     function clickHeaderItems(idx) {
         setActiveHeaderItem(idx)
-        navigate(navs[idx].path)
+  
+        let title = navs[idx].childrenNav.title
+        let navsRouter = navs[idx].childrenNav.navsRouter
+  
+        navigate(navs[idx].path,{state:{title,navs:navsRouter}})
     }
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     function focusInput(){
@@ -37,11 +41,60 @@ export default function Head() {
         {
             name:'主页',
             path:'/',
+            childrenNav:{
+                title:'主页导航',
+                navsRouter:{
+                    topNavs:[
+                        {
+                            name:'主页1',
+                            path:'/home1',
+                            element:<div>主页1</div>
+                        },
+                        {
+                            name:'主页2',
+                            path:'/home2',
+                            element:<div>主页2</div>
+                        },  
+                    ],
+                    bottomNavs:[
+                        {
+                            name:'主页bottom',
+                            path:'/home1',
+                            element:<div>主页1</div>
+                        },
+                    ]
+                }
+            }
         },
         {
             name:'日志',
             path:'/diary',
+            childrenNav:{
+                title:'日志导航',
+                navsRouter:{
+                    topNavs:[
+                        {
+                            name:'日志1',
+                            path:'/diary1',
+                            element:<div>日志1</div>
+                        },
+                        {
+                            name:'日志2',
+                            path:'/diary2',
+                            element:<div>日志2</div>
+                        }, 
+                    ],
+                    bottomNavs:[
+                        {
+                            name:'主页bottom',
+                            path:'/home1',
+                            element:<div>主页1</div>
+                        },
+                    ]
+                }
+            }
         },
+
         {
             name:'文档',
             path:'/doc',

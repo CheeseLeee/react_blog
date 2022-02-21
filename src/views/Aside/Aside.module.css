@@ -1,0 +1,48 @@
+.aisde_bg{
+    background-color: #ececec;
+    width: 30%;
+    height: 600px;
+    position: fixed;
+    right: 0;
+    top:70px;
+}
+.main{
+    width: 70%;
+    height: 600px;
+}
+.Aside_title{
+    padding: 60px 0 25px 25px;
+    display: flex;
+    cursor: pointer;
+    font-size: 17px;
+    color:black;
+    font-weight: 600;
+}
+.Aside_menu{
+    padding-left:40px;
+
+}
+.Aside_menu span{
+    display: flex;
+    
+    cursor: pointer;
+    margin: 8px 0;
+}
+.Aside_menu span:hover{
+    color: rgba(43, 41, 42, 0.493);
+}
+.Aside_bottomMenu{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left:40px;
+}
+.Aside_bottomMenu span{
+    cursor: pointer;
+    margin: 15px 0;
+    color:rgba(12, 2, 2, 0.973);
+    
+}
+.Aside_bottomMenu span:hover{
+    color: rgba(43, 41, 42, 0.493);
+}
