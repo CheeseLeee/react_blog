@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
-import { useLocation } from 'react-router'
+import { Navigate } from 'react-router'
 //const Home = lazy(() => import('../views/Home/Home'))
 import Home from '../views/Home/Home'
 //const Diary = lazy(() => import('../views/Diary/Diary'))
 import Diary from '../views/Diary/Diary'
-import Aside from '../views/Aside/Aside'
+import ContainerAside from '../store/Container/ContainerAside'
+import { store } from "../store/store";
 function DefaultRoute() {
     return (
         <main style={{ padding: "1rem" }}>
@@ -12,26 +13,30 @@ function DefaultRoute() {
         </main>
     )
 }
-function WithSuspense(Com) {
+/* function WithSuspense(Com) {
     return (
         <Suspense fallback={<DefaultRoute />}>
             <Com />
         </Suspense>
     )
-}
+} */
 export const routes = [
     {
+        path:'/',
+        element:<Navigate to="/home/home1" />
+    },
+    {
         name: 'Home',
-        path: '/',
-        element: <Aside/>,//WithSuspense(Home),
+        path: '/home',
+        element: <ContainerAside store={store}/>,//WithSuspense(Home),
         children:[
             {
                 path:'home1',
-                element:<Home/>
+                element:<div>home1</div>
             },
             {
                 path:'home2',
-                element:<Diary/>               
+                element:<div>home2</div>          
             }
         ],
         meta: {title:'Home'},
@@ -40,15 +45,15 @@ export const routes = [
     {
         name: 'Diary',
         path: '/Diary',
-        element: <Aside/>,//WithSuspense(Diary),
+        element: <ContainerAside store={store} />,//WithSuspense(Diary),
         children:[
             {
                 path:'diary1',
-                element:<div>123</div>
+                element:<div>diary1</div>
             },
             {
                 path:'diary2',
-                element:<Diary/>            
+                element:<div>diary2</div>         
             }
         ],
         meta: {title:'Diary'},

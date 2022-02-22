@@ -1,23 +1,30 @@
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate , Route, Routes, Outlet } from 'react-router-dom'
 import styles from '../Aside/Aside.module.css'
 
-export default function Aside(){
+export default function Aside(props){
     const location = useLocation()
     let navigate = useNavigate()
-    let navs 
+    let [state,setState] = useState([])
+    useEffect(() => {
+        setState(props.store.getState().headerNav[0].children)
+    },[])
+    useEffect(() => {
+        console.log(location.state)
+        if(location.state){
+            setState(location.state.data)
+            console.log(1)
+        }      
+    },[location])
+
     let topMenu
     function goRoute(index) {
-        navigate(navs[index].path)
+        navigate(state[index].path)   
+        console.log(location.state)    
     }
-    if(location.state   ){
-        navs = location.state.data
-        console.log(navs)
-        topMenu = navs.map((item,index) => {
-            return <span onClick={() => goRoute(index)} key={index}>{item.name}</span>
-        }) 
-    }
-
-
+    topMenu = state.map((item,index) => {
+        return <span onClick={() => goRoute(index)} key={index}>{item.name}</span>
+    }) 
     return (
         <div>
             <div className={styles.main}>

@@ -7,7 +7,7 @@ import { store } from "./store/store";
 
 function Router(){
   const elements = useRoutes(routes)
-  console.log(elements)
+
 /* 
   let title
   if(elements.props.value.matches[0].route.meta){

@@ -2,19 +2,29 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './Head.module.css'
 export default function Head(props) {
-    console.log(props.store.getState())
+  
     let navs = props.store.getState().headerNav
     // handler nav
     let location = useLocation()
     useEffect(() => {      
         activateNav(location)
+     
     },[location]) 
+/*     useEffect(() => {
+        if(activeHeaderItem){
+            clickHeaderItems(activeHeaderItem)
+        }else{
+            clickHeaderItems(0)
+        }       
+    },[]) */
     function activateNav(location){    
         let currentUrl = location.pathname
+        let firstUrl = '/' + currentUrl.split('/')[1] 
+        console.log(firstUrl)
         let navPaths = navs.map(item => {
             return item.path
         })
-        let activeIndex = navPaths.indexOf(currentUrl)
+        let activeIndex = navPaths.indexOf(firstUrl)
         if(activeIndex === -1){
             setActiveHeaderItem(0)
         }else{
@@ -26,7 +36,7 @@ export default function Head(props) {
     function clickHeaderItems(idx) {    
         setActiveHeaderItem(idx)
         console.log(navs[idx].path,'??? ')
-        navigate(navs[idx].path,{state:{data:navs[idx].children}})
+        navigate(navs[idx].children[0].path,{state:{data:navs[idx].children}})
     }
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     function focusInput(){
