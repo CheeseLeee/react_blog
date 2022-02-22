@@ -23,12 +23,12 @@ function DefaultRoute() {
 export const routes = [
     {
         path:'/',
-        element:<Navigate to="/home/home1" />
+        element:<Navigate to="/Home" />
     },
     {
         name: 'Home',
-        path: '/home',
-        element: <ContainerAside store={store}/>,//WithSuspense(Home),
+        path: '/Home',
+        element: <ContainerAside />,//WithSuspense(Home),
         children:[
             {
                 path:'home1',
@@ -45,7 +45,7 @@ export const routes = [
     {
         name: 'Diary',
         path: '/Diary',
-        element: <ContainerAside store={store} />,//WithSuspense(Diary),
+        element: <ContainerAside  />,//WithSuspense(Diary),
         children:[
             {
                 path:'diary1',

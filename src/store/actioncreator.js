@@ -1,0 +1,2 @@
+export const NAVTOHOME = 'NAVTOHOME'
+export const NAVETODIARY = 'NAVETODIARY'

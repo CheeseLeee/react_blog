@@ -1,42 +1,40 @@
-import { useEffect, useState } from 'react'
+import { useEffect,  useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { actionNavToDiary } from '../../../store/actions'
+
 import styles from './Head.module.css'
-export default function Head(props) {
-  
-    let navs = props.store.getState().headerNav
+export default function Head({onChangeNav}) {
     // handler nav
     let location = useLocation()
+    let [activeHeaderItem, setActiveHeaderItem] = useState(0) 
     useEffect(() => {      
-        activateNav(location)
-     
+        activateNav(location) 
     },[location]) 
-/*     useEffect(() => {
-        if(activeHeaderItem){
-            clickHeaderItems(activeHeaderItem)
-        }else{
-            clickHeaderItems(0)
-        }       
-    },[]) */
-    function activateNav(location){    
+    useEffect(() => {
+        onChangeNav(activeHeaderItem) 
+    },[activeHeaderItem])
+    function activateNav(location){      
         let currentUrl = location.pathname
         let firstUrl = '/' + currentUrl.split('/')[1] 
-        console.log(firstUrl)
         let navPaths = navs.map(item => {
             return item.path
-        })
+        })    
         let activeIndex = navPaths.indexOf(firstUrl)
+        console.log(navPaths,firstUrl,activeIndex)        
         if(activeIndex === -1){
             setActiveHeaderItem(0)
         }else{
             setActiveHeaderItem(activeIndex)
+            console.log(activeHeaderItem,'activeSet')
         }
+       
     }
-    let [activeHeaderItem, setActiveHeaderItem] = useState(0) 
+    
     let navigate = useNavigate();
     function clickHeaderItems(idx) {    
         setActiveHeaderItem(idx)
-        console.log(navs[idx].path,'??? ')
-        navigate(navs[idx].children[0].path,{state:{data:navs[idx].children}})
+             
+        navigate(navs[idx].path)
     }
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     function focusInput(){
@@ -45,14 +43,16 @@ export default function Head(props) {
     function blurInput(){
         setIsFocus_SearchInput(false)
     }
-/*     let navs = [
+     let navs = [
         {
             name:'主页',
-            path:'/',
+            path:'/Home',
+            action:'navToHome',
         },
         {
             name:'日志',
-            path:'/diary',
+            path:'/Diary',
+            action:'navToDiary',
         
         },
         {
@@ -63,7 +63,7 @@ export default function Head(props) {
             name:'社区',
             path:'/community',
         },
-    ] */
+    ] 
     let headerItems = navs.map((item, idx) => {
         return <li key={idx}
                 onClick={() => clickHeaderItems(idx)}
