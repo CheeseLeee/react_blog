@@ -1,11 +1,9 @@
 import Head from "../../components/public/Head/Head";
 import { connect, Provider } from 'react-redux'
 import { actionNavToDiary,actionNavToHome } from "../actions";
-
   const mapStateToProps = state => {
-    
     return {
-      headNavs:state.headNavs
+      headNavs:state
     }
   }
   const mapDispatchToProps = dispatch => {
@@ -22,8 +20,7 @@ import { actionNavToDiary,actionNavToHome } from "../actions";
             break;
             default :
               return 
-        }
-        
+        }       
       }
     }
   } 

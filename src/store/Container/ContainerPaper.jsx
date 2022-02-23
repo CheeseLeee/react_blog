@@ -5,7 +5,7 @@ import {actionNavToOutlet } from "../actions";
   const mapStateToProps = state => {
     console.log(state,'paper')
     return {
-      asideNav:state.asideNav
+      asideNav:state
     }
   }
   const mapDispatchToProps = dispatch => {

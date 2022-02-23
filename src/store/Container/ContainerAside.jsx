@@ -4,7 +4,7 @@ import { actionNavToOutlet } from "../actions";
 const mapStateToProps = state => {
     console.log(state)
     return {
-      asideNav:state.asideNav,
+      headNavs:state,
       activeOutlet:state.activeOutlet
     }
   }

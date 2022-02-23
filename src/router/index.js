@@ -18,21 +18,23 @@ function DefaultRoute() {
     )
 } */
 export const routes = [
-    {
+ /*    {
         path:'/',
         element:<Navigate to="/Home/home1" />
-    },
+    }, */
     {
-        name: 'Home',
+        name: '主页',
         path: '/Home',
         element: <ContainerAside />,//WithSuspense(Home),
         children:[
             {
+                name:'主页1',
                 path:'home1',
                 element:<ContainerPaper/>,
                 contextElement:<div>home1</div>
             },
             {
+                name:'主页2',
                 path:'home2',
                 element:<ContainerPaper/>,
                 contextElement:<div>home2</div>   
@@ -42,16 +44,18 @@ export const routes = [
 
     },
     {
-        name: 'Diary',
+        name: '日志',
         path: '/Diary',
         element: <ContainerAside  />,//WithSuspense(Diary),
         children:[
             {
+                name:'日志1',
                 path:'diary1',
                 element:<ContainerPaper/>,
                 contextElement:<div>diary1</div>
             },
             {
+                name:'日志2',
                 path:'diary2',
                 element:<ContainerPaper/>,
                 contextElement:<div>diary2</div>  

@@ -1,55 +1,36 @@
 import { useEffect,  useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { actionNavToDiary } from '../../../store/actions'
-
 import styles from './Head.module.css'
-export default function Head({headNavs ,onChangeNav}) {
-    // handler nav
-    let location = useLocation()
-/*     let currentUrl = location.pathname
-    let firstUrl = '/' + currentUrl.split('/')[1]  */
-    let [activeHeaderItem, setActiveHeaderItem] = useState(0) 
-    useEffect(() => {            
-        activateNav(location) 
-    },[location]) 
-    useEffect(() => {
-        onChangeNav(activeHeaderItem) 
-    },[activeHeaderItem])
-    function activateNav(location){      
-        let currentUrl = location.pathname
-        let firstUrl = '/' + currentUrl.split('/')[1] 
-        let navPaths = headNavs.map(item => {
-            return item.path
-        })    
-        let activeIndex = navPaths.indexOf(firstUrl)
-        console.log(navPaths,firstUrl,activeIndex)        
-        if(activeIndex === -1){
-            setActiveHeaderItem(0)
-        }else{
-            setActiveHeaderItem(activeIndex)
-            console.log(activeHeaderItem,'activeSet')
-        }
-       
-    }
-    
-    let navigate = useNavigate();
-    function clickHeaderItems(idx) {  
-          
-        setActiveHeaderItem(idx)           
-        navigate(headNavs[idx].path + headNavs[idx].defualtRoute)
-    }
+export default function Head({headNavs}) {
+    let navigate = useNavigate()
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
+    let [activeHeadItem,setActiveHeadItem] = useState(0)
+    let loaction = useLocation()
+    let formerUrl =  '/' + loaction.pathname.split('/')[1]
+    useEffect(() => {
+        activeRoute()
+    },[])
+    function activeRoute(){
+        headNavs.forEach((ele,idx) => {
+            if(ele.path === formerUrl){
+                setActiveHeadItem(idx)
+            }
+        });
+    }
     function focusInput(){
         setIsFocus_SearchInput(true)
     }
     function blurInput(){
         setIsFocus_SearchInput(false)
     }
-
+    function clickNavItem(index){
+        setActiveHeadItem(index)
+        navigate(headNavs[index].path + '/' + headNavs[index].children[0].path)
+    }
     let headerItems = headNavs.map((item, idx) => {
         return <li key={idx}
-                onClick={() => clickHeaderItems(idx)}
-                className={activeHeaderItem === idx ? styles.headerItems_li_active : styles.headerItems_li}
+                onClick={() => clickNavItem(idx)}
+                className={activeHeadItem === idx ? styles.headerItems_li_active : styles.headerItems_li}
                 >{item.name}</li>
     })
     return (
