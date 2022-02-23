@@ -3,9 +3,9 @@ import { connect, Provider } from 'react-redux'
 import { actionNavToDiary,actionNavToHome } from "../actions";
 
   const mapStateToProps = state => {
-    console.log(state)
+    
     return {
-      headerNav:state.headerNav
+      headNavs:state.headNavs
     }
   }
   const mapDispatchToProps = dispatch => {
@@ -17,7 +17,7 @@ import { actionNavToDiary,actionNavToHome } from "../actions";
             dispatch(actionNavToHome())
             break;
             case 1 :
-              console.log(actionNavToDiary())
+              console.log(111111)
               dispatch(actionNavToDiary())
             break;
             default :

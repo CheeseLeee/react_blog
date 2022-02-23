@@ -1,17 +1,18 @@
 import Aside from '../../views/Aside/Aside'
-import { connect, Provider } from 'react-redux'
-
+import { connect } from 'react-redux'
+import { actionNavToOutlet } from "../actions";
 const mapStateToProps = state => {
     console.log(state)
     return {
-      headerNav:state.headerNav
+      asideNav:state.asideNav,
+      activeOutlet:state.activeOutlet
     }
   }
   const mapDispatchToProps = dispatch => {
     return {
-      onChangeNav(){
-        dispatch({type:'navToDiary'})
+      onNavToOutlet(index){
+        dispatch(actionNavToOutlet(index))
       }
-    }
+  }
   } 
 export default connect(mapStateToProps,mapDispatchToProps)(Aside)

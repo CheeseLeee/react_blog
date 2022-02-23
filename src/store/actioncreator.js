@@ -1,2 +1,3 @@
 export const NAVTOHOME = 'NAVTOHOME'
 export const NAVETODIARY = 'NAVETODIARY'
+export const NAVTOOUTLET = 'NAVTOOUTLET'

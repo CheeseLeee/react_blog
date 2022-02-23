@@ -1,34 +1,19 @@
-import Head from "./components/public/Head/Head"
 import { BrowserRouter,useRoutes} from "react-router-dom";
 import {routes} from './router/index'
-import ContainerHeader from "./store/Container/ContainerHeader";
-import { store } from "./store/store";
-
-
+import ContainerHead from "./store/Container/ContainerHead";
 function Router(){
   const elements = useRoutes(routes)
-  
-/* 
-  let title
-  if(elements.props.value.matches[0].route.meta){
-    title = elements.props.value.matches[0].route.meta.title
-    document.title = title
-  }else{
-    document.title = 'React app'
-  } */
   return elements 
 }
 function App(){
   return (
       <div id="app">
           <BrowserRouter>
-            <ContainerHeader store={store}/>
+            <ContainerHead/>
             <Router/> 
           </BrowserRouter>         
       </div>
  
   )
 }
-
-
 export default App

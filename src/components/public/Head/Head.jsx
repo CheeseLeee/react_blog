@@ -3,11 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { actionNavToDiary } from '../../../store/actions'
 
 import styles from './Head.module.css'
-export default function Head({onChangeNav}) {
+export default function Head({headNavs ,onChangeNav}) {
     // handler nav
     let location = useLocation()
+/*     let currentUrl = location.pathname
+    let firstUrl = '/' + currentUrl.split('/')[1]  */
     let [activeHeaderItem, setActiveHeaderItem] = useState(0) 
-    useEffect(() => {      
+    useEffect(() => {            
         activateNav(location) 
     },[location]) 
     useEffect(() => {
@@ -16,7 +18,7 @@ export default function Head({onChangeNav}) {
     function activateNav(location){      
         let currentUrl = location.pathname
         let firstUrl = '/' + currentUrl.split('/')[1] 
-        let navPaths = navs.map(item => {
+        let navPaths = headNavs.map(item => {
             return item.path
         })    
         let activeIndex = navPaths.indexOf(firstUrl)
@@ -31,10 +33,10 @@ export default function Head({onChangeNav}) {
     }
     
     let navigate = useNavigate();
-    function clickHeaderItems(idx) {    
-        setActiveHeaderItem(idx)
-             
-        navigate(navs[idx].path)
+    function clickHeaderItems(idx) {  
+          
+        setActiveHeaderItem(idx)           
+        navigate(headNavs[idx].path + headNavs[idx].defualtRoute)
     }
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     function focusInput(){
@@ -43,28 +45,8 @@ export default function Head({onChangeNav}) {
     function blurInput(){
         setIsFocus_SearchInput(false)
     }
-     let navs = [
-        {
-            name:'主页',
-            path:'/Home',
-            action:'navToHome',
-        },
-        {
-            name:'日志',
-            path:'/Diary',
-            action:'navToDiary',
-        
-        },
-        {
-            name:'文档',
-            path:'/doc',
-        },
-        {
-            name:'社区',
-            path:'/community',
-        },
-    ] 
-    let headerItems = navs.map((item, idx) => {
+
+    let headerItems = headNavs.map((item, idx) => {
         return <li key={idx}
                 onClick={() => clickHeaderItems(idx)}
                 className={activeHeaderItem === idx ? styles.headerItems_li_active : styles.headerItems_li}

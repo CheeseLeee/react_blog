@@ -1,11 +1,8 @@
-import { lazy, Suspense } from 'react'
 import { Navigate } from 'react-router'
 //const Home = lazy(() => import('../views/Home/Home'))
-import Home from '../views/Home/Home'
 //const Diary = lazy(() => import('../views/Diary/Diary'))
-import Diary from '../views/Diary/Diary'
 import ContainerAside from '../store/Container/ContainerAside'
-import { store } from "../store/store";
+import ContainerPaper from '../store/Container/ContainerPaper'
 function DefaultRoute() {
     return (
         <main style={{ padding: "1rem" }}>
@@ -23,7 +20,7 @@ function DefaultRoute() {
 export const routes = [
     {
         path:'/',
-        element:<Navigate to="/Home" />
+        element:<Navigate to="/Home/home1" />
     },
     {
         name: 'Home',
@@ -32,11 +29,13 @@ export const routes = [
         children:[
             {
                 path:'home1',
-                element:<div>home1</div>
+                element:<ContainerPaper/>,
+                contextElement:<div>home1</div>
             },
             {
                 path:'home2',
-                element:<div>home2</div>          
+                element:<ContainerPaper/>,
+                contextElement:<div>home2</div>   
             }
         ],
         meta: {title:'Home'},
@@ -49,11 +48,13 @@ export const routes = [
         children:[
             {
                 path:'diary1',
-                element:<div>diary1</div>
+                element:<ContainerPaper/>,
+                contextElement:<div>diary1</div>
             },
             {
                 path:'diary2',
-                element:<div>diary2</div>         
+                element:<ContainerPaper/>,
+                contextElement:<div>diary2</div>  
             }
         ],
         meta: {title:'Diary'},

@@ -1,13 +1,42 @@
-import {NAVTOHOME,NAVETODIARY} from './actioncreator'
+import Paper from '../views/Paper/Paper'
+import {NAVTOHOME,NAVETODIARY,NAVTOOUTLET} from './actioncreator'
+import { routes } from '../router'
 export let defaultNavRouteMap = {
-    headerNav:[
+    activeOutlet:null,
+    headNavs:[
+        {
+            name:'主页',
+            path:'/Home',
+            action:'navToHome',
+            defualtRoute:'/home1'
+         
+        },
+        {
+            name:'日志',
+            path:'/Diary',
+            action:'navToDiary',
+            defualtRoute:'/diary1'
+        
+        },
+        {
+            name:'文档',
+            path:'/doc',
+        },
+        {
+            name:'社区',
+            path:'/community',
+        },
+    ] ,
+    asideNav:[
         {
             name:'主页1',
-            element:null
+            element:<div>主页1</div>,
+            childrenPath:'/Home/home1'
         },
         {
             name:'主页2',
-            element:null
+            element:<div>主页2</div>,
+            childrenPath:'/Home/home2'
         },
     ]
         
@@ -20,13 +49,34 @@ export function reducers(state = defaultNavRouteMap,action){
             console.log('to home')
             return {
                 ...state,
-                headerNav:[{name:'主页1',element:null},{name:'主页1',element:null}]
+                asideNav:[
+                    {
+                        name:'主页1',
+                        element:<div>主页1</div>,
+                        childrenPath:'/Home/home1'
+                    },
+                    {
+                        name:'主页2',
+                        element:<div>主页2</div>,
+                        childrenPath:'/Home/home2'
+                    },
+                ],
+                activeOutlet:<div>主页1</div>
             }
         case NAVETODIARY:
             console.log('to navToDiary')
             return {
                 ...state,
-                headerNav:[{name:'日志1',element:null},{name:'日志2',element:null}]
+                asideNav:[{name:'日志1',element:<div>日志1</div>,childrenPath:'/Diary/diary1'},{name:'日志2',element:<div>日志2</div>,
+                childrenPath:'/Diary/diary2'}],
+                activeOutlet:<div>日志1</div>
+            }
+        case NAVTOOUTLET:
+            console.log('to NAVTOOUTLET')
+            return {
+                ...state,
+
+                activeOutlet:state.asideNav[action.index].element
             }
         default :
         console.log('defautl')

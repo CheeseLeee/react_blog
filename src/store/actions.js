@@ -1,4 +1,4 @@
-import {NAVTOHOME,NAVETODIARY} from './actioncreator'
+import {NAVTOHOME,NAVETODIARY,NAVTOOUTLET} from './actioncreator'
 export function actionNavToHome(text){
     return {
         type:NAVTOHOME,
@@ -11,4 +11,11 @@ export function actionNavToDiary(text){
         type:NAVETODIARY,
         text
     }
+}
+
+export function actionNavToOutlet(index){
+    return {
+        type:NAVTOOUTLET,
+        index
+    } 
 }
