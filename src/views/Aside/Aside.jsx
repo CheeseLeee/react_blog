@@ -4,15 +4,28 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styles from '../Aside/Aside.module.css'
 import Paper from '../Paper/Paper'
 export default function Aside({headNavs}){
+    let loaction = useLocation()
     useEffect(() => {
         console.log(activeHeadItem)
     },[])
     let navgiate = useNavigate()
+    useEffect(() => {
+        headNavs[activeHeadItem].children.map((item,index) => {
+            if(item.path === latteUrl){
+                setActiveAsideItem(index)
+            }
+        })      
+    },[])
+    let formerUrl =  '/' + loaction.pathname.split('/')[1]
+    let latteUrl = loaction.pathname.split('/')[2]
+
     function clickAsideNav(index){
         navgiate(headNavs[activeHeadItem].path + '/' + headNavs[activeHeadItem].children[index].path)
+        setActiveAsideItem(index)
+    
     }
-    let loaction = useLocation()
-    let formerUrl =  '/' + loaction.pathname.split('/')[1]
+
+    let [activAsideItem,setActiveAsideItem] = useState(0)
     let activeHeadItem 
     headNavs.forEach((ele,idx) => {
         if(ele.path === formerUrl){
@@ -21,7 +34,7 @@ export default function Aside({headNavs}){
     })
     console.log(headNavs[activeHeadItem])
     let asideNavs = headNavs[activeHeadItem].children.map((ele,index) => {
-        return <li onClick={() => clickAsideNav(index)} key={index}>{ele.name}</li>
+        return <li className={activAsideItem === index ? styles.active_aside : undefined} onClick={() => clickAsideNav(index)} key={index}>{ele.name}</li>
     })
     /* let  asideNav = props.asideNav
     let [activeIndex,setActiveIndex] = useState(0)
