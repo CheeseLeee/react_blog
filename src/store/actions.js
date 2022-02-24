@@ -13,9 +13,9 @@ export function actionNavToDiary(text){
     }
 }
 
-export function actionNavToOutlet(index){
+export function actionNavToOutlet(activeNavInfo){
     return {
         type:NAVTOOUTLET,
-        index
+        activeNavInfo
     } 
 }

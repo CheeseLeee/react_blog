@@ -1,7 +1,9 @@
-import { useEffect,  useState } from 'react'
+import { useContext, useEffect,  useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { ContextEventBus } from '../../..'
 import styles from './Head.module.css'
-export default function Head({headNavs}) {
+export default function Head({headNavs,onNavToOutlet}) {
+    const eventBus = useContext(ContextEventBus)
     let navigate = useNavigate()
     let [isFocus_SearchInput,setIsFocus_SearchInput] = useState(false)
     let [activeHeadItem,setActiveHeadItem] = useState(0)
@@ -16,7 +18,15 @@ export default function Head({headNavs}) {
                 setActiveHeadItem(idx)
             }
         });
+
     }
+    useEffect(() => {
+        
+        onNavToOutlet({
+            activAsideItem:0,
+            activeHeadItem:activeHeadItem
+        })
+    },[activeHeadItem])
     function focusInput(){
         setIsFocus_SearchInput(true)
     }
@@ -24,6 +34,7 @@ export default function Head({headNavs}) {
         setIsFocus_SearchInput(false)
     }
     function clickNavItem(index){
+        eventBus.emit('changeActiveHeadItem')
         setActiveHeadItem(index)
         navigate(headNavs[index].path + '/' + headNavs[index].children[0].path)
     }

@@ -4,11 +4,14 @@ import './index.css';
 import {store} from './store/store'
 import { connect, Provider } from 'react-redux'
 import App from './App';
-
-
+import {EventBus} from './eventBus/index'
+let eventBus = new EventBus()
+export let ContextEventBus = React.createContext(eventBus);
 ReactDOM.render(
   <Provider store={store}>
+  <ContextEventBus.Provider value={eventBus}>
     <App />
+  </ContextEventBus.Provider>
   </Provider>,
   document.getElementById('root')
 );

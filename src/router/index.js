@@ -18,10 +18,10 @@ function DefaultRoute() {
     )
 } */
 export const routes = [
- /*    {
+    {
         path:'/',
         element:<Navigate to="/Home/home1" />
-    }, */
+    },
     {
         name: '主页',
         path: '/Home',

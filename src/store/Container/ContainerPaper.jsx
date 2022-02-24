@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import Paper from '../../views/Paper/Paper';
 import {actionNavToOutlet } from "../actions";
   const mapStateToProps = state => {
-    console.log(state,'paper')
+    
     return {
-      asideNav:state
+      activeOutlet:state.activeOutlet
     }
   }
   const mapDispatchToProps = dispatch => {
